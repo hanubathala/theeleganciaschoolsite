@@ -25,6 +25,17 @@ import review8 from './assets/review8.webp';
 import review9 from './assets/review9.webp';
 import review10 from './assets/review10.webp';
 
+import g1 from './assets/g1.webp';
+import g2 from './assets/g2.webp';
+import g3 from './assets/g3.webp';
+import g4 from './assets/g4.webp';
+import g5 from './assets/g5.webp';
+import g6 from './assets/g6.webp';
+import g7 from './assets/g7.webp';
+import g8 from './assets/g8.webp';
+import g9 from './assets/g9.webp';
+import g10 from './assets/g10.webp';
+import g11 from './assets/g11.webp';
 
 
     
@@ -218,12 +229,17 @@ const CORE_VALUES = [
 ];
 
 const GALLERY_IMAGES = [
-  { src: 'https://images.pexels.com/photos/8613095/pexels-photo-8613095.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Children learning in classroom' },
-  { src: 'https://images.pexels.com/photos/1001914/pexels-photo-1001914.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Kids playing together' },
-  { src: 'https://images.pexels.com/photos/5212345/pexels-photo-5212345.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Art and creativity' },
-  { src: 'https://images.pexels.com/photos/8363104/pexels-photo-8363104.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Story time' },
-  { src: 'https://images.pexels.com/photos/8363736/pexels-photo-8363736.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Outdoor play' },
-  { src: 'https://images.pexels.com/photos/7163956/pexels-photo-7163956.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Science exploration' },
+  { src: g1, alt: 'Children learning in classroom' },
+  { src: g2, alt: 'Kids playing together' },
+  { src: g3, alt: 'Art and creativity' },
+  { src: g4, alt: 'Story time' },
+  { src: g5, alt: 'Outdoor play' },
+  { src: g6, alt: 'Science exploration' },
+  { src: g7, alt: 'Music and movement' },
+  { src: g8, alt: 'Sports and games' },
+  { src: g9, alt: 'Field trip fun' },
+  { src: g10, alt: 'Graduation day' },
+  { src: g11, alt: 'Celebrating diversity' }
 ];
 
 const REVIEW_IMAGES = [
