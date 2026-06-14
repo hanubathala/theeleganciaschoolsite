@@ -1,9 +1,39 @@
 import { useState, useEffect, useRef } from 'react';
+import type { FormEvent } from 'react';
+import logo from './assets/logo.png';
+import s1 from './assets/s1.webp';
+import s2 from './assets/s2.webp';
+import s3 from './assets/s3.webp';
+import s4 from './assets/s4.webp';
+import aboutus from './assets/aboutus.webp';
+
+import karate from './assets/karate.webp';
+import skating from './assets/skating.webp';
+import dance from './assets/dance.webp';
+import phonics from './assets/phonics.webp';
+import abacus from './assets/abacus.webp';
+import singing from './assets/singing.webp';
+
+import review1 from './assets/review1.webp';
+import review2 from './assets/review2.webp';
+import review3 from './assets/review3.webp';
+import review4 from './assets/review4.webp';
+import review5 from './assets/review5.webp';
+import review6 from './assets/review6.webp';
+import review7 from './assets/review7.webp';
+import review8 from './assets/review8.webp';
+import review9 from './assets/review9.webp';
+import review10 from './assets/review10.webp';
+
+
+
+    
+
 import {
-  Menu, X, MapPin, Phone, Mail, Star, ArrowRight,
+  Menu, X, MapPin, Phone, Mail, ArrowRight,
   BookOpen, Heart, Shield, Lightbulb, Users, Clock, Music,
-  CheckCircle, ChevronRight, GraduationCap, Sun, Leaf,
-  Trophy, Zap, Target, Smile, Globe, ChevronDown,
+  CheckCircle, ChevronLeft, ChevronRight, GraduationCap, Sun, Leaf,
+  Zap, Target, Smile, Globe, ChevronDown,
   Facebook, Instagram, Youtube, Award
 } from 'lucide-react';
 
@@ -34,6 +64,13 @@ const STATS = [
   { val: '50+', label: 'Recognitions' },
   { val: '20+', label: 'Activities' },
   { val: '11', label: 'Years of Experience' },
+];
+
+const ABOUT_FIGURES = [
+  { icon: Users, val: '2000+', label: 'Students Impacted' },
+  { icon: Award, val: '50+', label: 'Recognitions' },
+  { icon: Zap, val: '20+', label: 'Activities' },
+  { icon: Clock, val: '11', label: 'Years of Experience' },
 ];
 
 const PROGRAMS = [
@@ -97,37 +134,37 @@ const ACTIVITIES = [
   {
     title: 'Karate',
     desc: 'Building discipline, focus, and physical strength through martial arts training.',
-    img: 'https://images.pexels.com/photos/8612988/pexels-photo-8612988.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: karate,
     color: 'from-orange-600/80 to-orange-900/80',
   },
   {
     title: 'Skating',
     desc: 'Developing balance, coordination, and confidence on wheels in a safe environment.',
-    img: 'https://images.pexels.com/photos/6551136/pexels-photo-6551136.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: skating,
     color: 'from-sky-600/80 to-sky-900/80',
   },
   {
     title: 'Western Dance',
     desc: 'Expressing creativity and rhythm through energetic and joyful dance forms.',
-    img: 'https://images.pexels.com/photos/1701202/pexels-photo-1701202.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: dance,
     color: 'from-rose-600/80 to-rose-900/80',
   },
   {
     title: 'Music',
     desc: 'Nurturing a love for melody, rhythm, and musical expression from an early age.',
-    img: 'https://images.pexels.com/photos/4472028/pexels-photo-4472028.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: singing,
     color: 'from-violet-600/80 to-violet-900/80',
   },
   {
     title: 'Phonics',
     desc: 'Building strong reading foundations through proven phonics-based literacy techniques.',
-    img: 'https://images.pexels.com/photos/8363153/pexels-photo-8363153.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: phonics,
     color: 'from-emerald-600/80 to-emerald-900/80',
   },
   {
     title: 'Abacus',
     desc: 'Developing mental arithmetic and concentration skills with the ancient abacus method.',
-    img: 'https://images.pexels.com/photos/4145354/pexels-photo-4145354.jpeg?auto=compress&cs=tinysrgb&w=600',
+    img: abacus,
     color: 'from-amber-600/80 to-amber-900/80',
   },
 ];
@@ -180,27 +217,6 @@ const CORE_VALUES = [
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    name: 'Priya Sharma',
-    role: 'Parent of Aarav, LKG',
-    text: 'The Elegancia School has transformed my son\'s love for learning. The teachers are incredibly dedicated and the Finland-based approach truly works!',
-    rating: 5,
-  },
-  {
-    name: 'Rahul Mehta',
-    role: 'Parent of Tara, Nursery',
-    text: 'My daughter looks forward to school every single day. The play-based curriculum and warm environment make it the perfect place for early childhood development.',
-    rating: 5,
-  },
-  {
-    name: 'Sneha Reddy',
-    role: 'Parent of Kiran, UKG',
-    text: 'We searched all over Hyderabad for a school that truly values a child\'s natural curiosity. We found it here at Elegancia.',
-    rating: 5,
-  },
-];
-
 const GALLERY_IMAGES = [
   { src: 'https://images.pexels.com/photos/8613095/pexels-photo-8613095.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Children learning in classroom' },
   { src: 'https://images.pexels.com/photos/1001914/pexels-photo-1001914.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Kids playing together' },
@@ -210,15 +226,68 @@ const GALLERY_IMAGES = [
   { src: 'https://images.pexels.com/photos/7163956/pexels-photo-7163956.jpeg?auto=compress&cs=tinysrgb&w=800', alt: 'Science exploration' },
 ];
 
+const REVIEW_IMAGES = [
+  review1,
+  review2,
+  review3,
+  review4,
+  review5,
+  review6,
+  review7,
+  review8,
+  review9,
+  review10,
+];
+
+const SCHOOL_ADDRESS = 'Bus Stop, Phase 2, B near, Rd Number 16, Kukatpally Housing Board Colony, IDPL Staff Cooperative Housing Society, Vasanth Nagar, Hyderabad, Telangana 500085';
+const MAP_EMBED_URL = `https://www.google.com/maps?q=${encodeURIComponent(SCHOOL_ADDRESS)}&output=embed`;
+
+const HERO_SLIDES = [s1, s2, s3, s4];
+const ADMISSIONS_POPUP_DISMISSED_KEY = 'admissions_popup_dismissed_v2';
+const SOCIAL_LINKS = {
+  facebook: 'https://www.facebook.com/TheEleganciaSchool',
+  instagram: 'https://www.instagram.com/the_elegancia_school',
+  youtube: 'https://www.youtube.com/@theelegancia5729',
+};
+
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const [activeReviewSlide, setActiveReviewSlide] = useState(0);
+  const [showAdmissionsPopup, setShowAdmissionsPopup] = useState(false);
+  const [isSendingHomeForm, setIsSendingHomeForm] = useState(false);
+  const [isSendingPopupForm, setIsSendingPopupForm] = useState(false);
+  const [homeFormStatus, setHomeFormStatus] = useState<null | { type: 'success' | 'error'; message: string }>(null);
+  const [popupFormStatus, setPopupFormStatus] = useState<null | { type: 'success' | 'error'; message: string }>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide(prev => (prev + 1) % HERO_SLIDES.length);
+    }, 4500);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const isDismissed = window.localStorage.getItem(ADMISSIONS_POPUP_DISMISSED_KEY) === '1';
+    if (!isDismissed) {
+      setShowAdmissionsPopup(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveReviewSlide(prev => (prev + 1) % REVIEW_IMAGES.length);
+    }, 3500);
+    return () => window.clearInterval(timer);
   }, []);
 
   const scrollTo = (id: string) => {
@@ -228,7 +297,84 @@ export default function App() {
     setActiveSection(id);
   };
 
+  const openAdmissionsPopup = () => {
+    setPopupFormStatus(null);
+    setShowAdmissionsPopup(true);
+  };
+
+  const nextReviewSlide = () => {
+    setActiveReviewSlide(prev => (prev + 1) % REVIEW_IMAGES.length);
+  };
+
+  const prevReviewSlide = () => {
+    setActiveReviewSlide(prev => (prev - 1 + REVIEW_IMAGES.length) % REVIEW_IMAGES.length);
+  };
+
+  const closeAdmissionsPopup = () => {
+    setShowAdmissionsPopup(false);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(ADMISSIONS_POPUP_DISMISSED_KEY, '1');
+    }
+  };
+
+  const handleFormSubmit = (formType: 'home' | 'popup') => async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    const action = form.getAttribute('action') || 'https://formsubmit.co/smartkennedyschoolteam@gmail.com';
+    const ajaxEndpoint = action.includes('/ajax/')
+      ? action
+      : action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
+
+    if (formType === 'home') {
+      setIsSendingHomeForm(true);
+      setHomeFormStatus(null);
+    } else {
+      setIsSendingPopupForm(true);
+      setPopupFormStatus(null);
+    }
+
+    try {
+      const payload = Object.fromEntries(formData.entries());
+      const response = await fetch(ajaxEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      form.reset();
+      const successMessage = 'Message sent successfully. We will contact you soon.';
+      if (formType === 'home') {
+        setHomeFormStatus({ type: 'success', message: successMessage });
+      } else {
+        setPopupFormStatus({ type: 'success', message: successMessage });
+      }
+    } catch {
+      const errorMessage = 'Unable to send message right now. Please try again in a moment.';
+      if (formType === 'home') {
+        setHomeFormStatus({ type: 'error', message: errorMessage });
+      } else {
+        setPopupFormStatus({ type: 'error', message: errorMessage });
+      }
+    } finally {
+      if (formType === 'home') {
+        setIsSendingHomeForm(false);
+      } else {
+        setIsSendingPopupForm(false);
+      }
+    }
+  };
+
   const heroVis = useInView(0.1);
+  const statsVis = useInView(0.1);
   const aboutVis = useInView(0.1);
   const philVis = useInView(0.1);
   const valuesVis = useInView(0.1);
@@ -238,15 +384,16 @@ export default function App() {
   const testVis = useInView(0.1);
   const ctaVis = useInView(0.1);
   const contactVis = useInView(0.1);
+  const footerVis = useInView(0.1);
 
   return (
     <div className="font-sans antialiased text-slate-800 overflow-x-hidden">
 
       {/* ── Navbar ── */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-md py-2' : 'bg-transparent py-4'}`}>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#e6e4d2] shadow-md py-2' : 'bg-[#e6e4d2]/95 backdrop-blur-sm py-3'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
           <a href="#home" onClick={() => scrollTo('home')} className="flex-shrink-0">
-            <img src="/cropped-logo270by80.webp" alt="The Elegancia School" className="h-10 sm:h-12 w-auto object-contain" />
+            <img src={logo} alt="Elegancia School" className="h-12 w-auto sm:h-14" />
           </a>
 
           {/* Desktop Nav */}
@@ -258,7 +405,7 @@ export default function App() {
                 className={`px-3 py-2 rounded-lg text-xs font-semibold tracking-wide transition-all duration-200 ${
                   activeSection === link.id
                     ? 'bg-amber-100 text-amber-700'
-                    : scrolled ? 'text-slate-700 hover:text-amber-600 hover:bg-amber-50' : 'text-white hover:bg-white/20'
+                    : 'text-slate-700 hover:text-amber-600 hover:bg-amber-50'
                 }`}
               >
                 {link.label}
@@ -269,22 +416,22 @@ export default function App() {
           {/* Social + Mobile toggle */}
           <div className="flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2">
-              <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
-                className={`p-1.5 rounded-lg transition-colors ${scrolled ? 'text-slate-500 hover:text-blue-600' : 'text-white/80 hover:text-white'}`}>
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"
+                className="p-1.5 rounded-lg transition-colors text-slate-500 hover:text-blue-600">
                 <Facebook size={18} />
               </a>
-              <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
-                className={`p-1.5 rounded-lg transition-colors ${scrolled ? 'text-slate-500 hover:text-rose-500' : 'text-white/80 hover:text-white'}`}>
+              <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer"
+                className="p-1.5 rounded-lg transition-colors text-slate-500 hover:text-rose-500">
                 <Instagram size={18} />
               </a>
-              <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
-                className={`p-1.5 rounded-lg transition-colors ${scrolled ? 'text-slate-500 hover:text-red-600' : 'text-white/80 hover:text-white'}`}>
+              <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer"
+                className="p-1.5 rounded-lg transition-colors text-slate-500 hover:text-red-600">
                 <Youtube size={18} />
               </a>
             </div>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className={`xl:hidden p-2 rounded-lg transition-colors ${scrolled ? 'text-slate-700' : 'text-white'}`}
+              className="xl:hidden p-2 rounded-lg transition-colors text-slate-700"
             >
               {menuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -293,7 +440,7 @@ export default function App() {
 
         {/* Mobile Nav */}
         {menuOpen && (
-          <div className="xl:hidden bg-white border-t border-slate-100 shadow-xl">
+          <div className="xl:hidden bg-[#e6e4d2] border-t border-amber-200 shadow-xl">
             <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
               {NAV_LINKS.map(link => (
                 <button
@@ -304,10 +451,10 @@ export default function App() {
                   {link.label}
                 </button>
               ))}
-              <div className="flex items-center gap-4 px-4 pt-3 pb-1 border-t border-slate-100 mt-2">
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors"><Facebook size={20} /></a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-rose-500 transition-colors"><Instagram size={20} /></a>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-red-600 transition-colors"><Youtube size={20} /></a>
+              <div className="flex items-center gap-4 px-4 pt-3 pb-1 border-t border-amber-200 mt-2">
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-blue-600 transition-colors"><Facebook size={20} /></a>
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-rose-500 transition-colors"><Instagram size={20} /></a>
+                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="text-slate-500 hover:text-red-600 transition-colors"><Youtube size={20} /></a>
               </div>
             </div>
           </div>
@@ -318,8 +465,16 @@ export default function App() {
       <section
         id="home"
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #0c4a6e 0%, #0e7490 40%, #065f46 100%)' }}
       >
+        {HERO_SLIDES.map((slide, index) => (
+          <img
+            key={slide}
+            src={slide}
+            alt="The Elegancia School campus moments"
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${index === activeHeroSlide ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0c4a6e]/85 via-[#0e7490]/70 to-[#065f46]/80" />
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-amber-400/10 blur-3xl" />
         <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-teal-300/10 blur-3xl" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-white/5 blur-3xl" />
@@ -350,7 +505,7 @@ export default function App() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => scrollTo('contact')}
+              onClick={openAdmissionsPopup}
               className="group px-8 py-4 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
             >
               Apply for Admission
@@ -375,13 +530,16 @@ export default function App() {
       </section>
 
       {/* ── Stats Bar ── */}
-      <section className="bg-[#1e2a6e] text-white py-8">
-        <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-[#2f377f] text-white py-8">
+        <div
+          ref={statsVis.ref}
+          className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${statsVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {STATS.map(s => (
               <div key={s.label} className="border-r border-white/10 last:border-0 px-4">
-                <div className="text-4xl font-bold text-amber-400">{s.val}</div>
-                <div className="text-white/70 text-sm mt-1">{s.label}</div>
+                <div className="text-4xl font-bold text-[#ffbf4d]">{s.val}</div>
+                <div className="text-white/75 text-sm mt-1">{s.label}</div>
               </div>
             ))}
           </div>
@@ -389,7 +547,7 @@ export default function App() {
       </section>
 
       {/* ── About Us ── */}
-      <section id="about" className="py-20 sm:py-28 bg-white">
+      <section id="about" className="py-20 sm:py-28 bg-[#fffdf7]">
         <div
           ref={aboutVis.ref}
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${aboutVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
@@ -398,7 +556,7 @@ export default function App() {
             <div className="relative">
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-amber-400/20 rounded-full blur-xl" />
               <img
-                src="https://images.pexels.com/photos/8613095/pexels-photo-8613095.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={aboutus}
                 alt="Students and teachers at The Elegancia School"
                 className="relative rounded-3xl shadow-2xl w-full h-[420px] object-cover"
               />
@@ -409,11 +567,12 @@ export default function App() {
             </div>
 
             <div>
-              <span className="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">About Us</span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-5 leading-tight">
+              <span className="inline-block bg-[#f9ecd8] text-[#c87512] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">About Us</span>
+              <h2 className={`section-heading text-3xl sm:text-4xl font-bold text-[#2f377f] mb-3 leading-tight ${aboutVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>
                 Nurturing Young Minds<br />
-                <span className="text-amber-500">at The Elegancia School</span>
+                <span className="text-[#d07a14]">at The Elegancia School</span>
               </h2>
+              <div className={`section-underline mb-6 ${aboutVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
               <p className="text-slate-600 mb-5 leading-relaxed">
                 At The Elegancia School, we believe in providing a well-designed, child-friendly environment
                 that fosters learning through an integrated curriculum. Our approach combines activity-based
@@ -425,15 +584,13 @@ export default function App() {
                 activities, including dance, karate, music, and sports, ensuring a well-rounded education.
               </p>
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Trophy, text: 'Finland-Based Curriculum' },
-                  { icon: Award, text: '50+ Recognitions' },
-                  { icon: Users, text: '2000+ Students Impacted' },
-                  { icon: Zap, text: '20+ Activities Offered' },
-                ].map(item => (
-                  <div key={item.text} className="flex items-center gap-3 bg-slate-50 rounded-xl p-3">
-                    <item.icon size={18} className="text-amber-500 flex-shrink-0" />
-                    <span className="text-sm font-medium text-slate-700">{item.text}</span>
+                {ABOUT_FIGURES.map(item => (
+                  <div key={item.label} className="rounded-2xl border border-[#eadfc6] bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+                    <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-xl bg-[#f2ebff] text-[#4f2db7]">
+                      <item.icon size={20} />
+                    </div>
+                    <div className="text-2xl font-bold text-[#2f377f]">{item.val}</div>
+                    <div className="text-sm font-medium text-slate-600">{item.label}</div>
                   </div>
                 ))}
               </div>
@@ -445,10 +602,11 @@ export default function App() {
             ref={philVis.ref}
             className={`transition-all duration-700 ${philVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
           >
-            <div className="grid lg:grid-cols-2 gap-12 items-start bg-slate-50 rounded-3xl p-10">
+            <div className="grid lg:grid-cols-2 gap-12 items-start bg-[#fff8ec] rounded-3xl p-10 border border-[#efe0c7] shadow-sm">
               <div>
-                <span className="inline-block bg-teal-100 text-teal-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Our Philosophy</span>
-                <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Our Philosophy</h3>
+                <span className="inline-block bg-[#f2ebff] text-[#4f2db7] text-sm font-semibold px-4 py-1.5 rounded-full mb-4">Our Philosophy</span>
+                <h3 className={`section-heading text-2xl sm:text-3xl font-bold text-[#2f377f] mb-3 ${philVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>Our Philosophy</h3>
+                <div className={`section-underline ${philVis.inView ? 'w-24 opacity-100' : 'w-0 opacity-0'}`} />
               </div>
               <div className="space-y-5">
                 <p className="text-slate-600 leading-relaxed border-l-4 border-amber-400 pl-5">
@@ -472,15 +630,16 @@ export default function App() {
       </section>
 
       {/* ── Core Values ── */}
-      <section className="py-20 sm:py-28 bg-[#1e2a6e]">
+      <section className="py-20 sm:py-28 bg-[#2f377f]">
         <div
           ref={valuesVis.ref}
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${valuesVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-14">
-            <div className="inline-block border-2 border-amber-400 text-white font-bold tracking-widest text-lg px-8 py-3 rounded-full mb-4">
+            <div className="inline-block border-2 border-[#ffbf4d] text-white font-bold tracking-widest text-lg px-8 py-3 rounded-full mb-4 bg-white/5">
               OUR CORE VALUES
             </div>
+            <div className={`section-underline mx-auto mb-4 ${valuesVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
             <p className="text-white/60 max-w-xl mx-auto">
               The principles that guide every interaction, lesson, and relationship at our school.
             </p>
@@ -493,8 +652,8 @@ export default function App() {
                 className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-amber-400/40 transition-all duration-300 group"
                 style={{ transitionDelay: `${i * 60}ms` }}
               >
-                <div className="w-11 h-11 bg-amber-400/15 rounded-xl flex items-center justify-center mb-4 group-hover:bg-amber-400/25 transition-colors">
-                  <val.icon size={22} className="text-amber-400" />
+                <div className="w-11 h-11 bg-[#ffbf4d]/15 rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#ffbf4d]/25 transition-colors">
+                  <val.icon size={22} className="text-[#ffbf4d]" />
                 </div>
                 <h4 className="text-white font-bold text-sm tracking-wider mb-2">{val.title}</h4>
                 <p className="text-white/55 text-sm leading-relaxed">{val.desc}</p>
@@ -511,8 +670,9 @@ export default function App() {
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${progVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-14">
-            <span className="inline-block bg-rose-100 text-rose-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Academics</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Programs Offered</h2>
+            <span className="inline-block bg-[#f2ebff] text-[#4f2db7] text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Academics</span>
+            <h2 className={`section-heading text-3xl sm:text-4xl font-bold text-[#2f377f] mb-3 ${progVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>Programs Offered</h2>
+            <div className={`section-underline mx-auto mb-4 ${progVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
             <p className="text-slate-500 max-w-xl mx-auto">
               Thoughtfully designed programs for every stage of early childhood, from 1.5 to 6 years.
             </p>
@@ -557,8 +717,9 @@ export default function App() {
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${actVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-14">
-            <span className="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Co-Curricular</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">Our Co-Curricular Activities</h2>
+            <span className="inline-block bg-[#f9ecd8] text-[#c87512] text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Co-Curricular</span>
+            <h2 className={`section-heading text-3xl sm:text-4xl font-bold text-[#2f377f] mb-3 ${actVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>Our Co-Curricular Activities</h2>
+            <div className={`section-underline mx-auto mb-4 ${actVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
             <p className="text-slate-500 max-w-xl mx-auto">
               Beyond academics, we nurture talent, discipline, and creativity through a rich range of activities.
             </p>
@@ -596,8 +757,9 @@ export default function App() {
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${galVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-14">
-            <span className="inline-block bg-sky-100 text-sky-600 text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Life at Elegancia</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">A Glimpse Into Our World</h2>
+            <span className="inline-block bg-[#f2ebff] text-[#4f2db7] text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Life at Elegancia</span>
+            <h2 className={`section-heading text-3xl sm:text-4xl font-bold text-[#2f377f] mb-3 ${galVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>A Glimpse Into Our World</h2>
+            <div className={`section-underline mx-auto mb-4 ${galVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
             <p className="text-slate-500 max-w-xl mx-auto">
               See the joy, creativity, and learning that fills every corner of our school.
             </p>
@@ -629,40 +791,57 @@ export default function App() {
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${testVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-14">
-            <span className="inline-block bg-amber-100 text-amber-700 text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Parent Speaks</span>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">What Parents Say</h2>
+            <span className="inline-block bg-[#f9ecd8] text-[#c87512] text-sm font-semibold px-4 py-1.5 rounded-full mb-3">Parent Speaks</span>
+            <h2 className={`section-heading text-3xl sm:text-4xl font-bold text-[#2f377f] mb-3 ${testVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>What Parents Say</h2>
+            <div className={`section-underline mx-auto mb-4 ${testVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t, i) => (
-              <div
-                key={t.name}
-                className="bg-white rounded-2xl p-7 shadow-sm border border-slate-100 hover:shadow-lg transition-all duration-300"
-                style={{ transitionDelay: `${i * 100}ms` }}
+          <div className="relative mx-auto max-w-5xl">
+            <div className="relative h-[300px] sm:h-[420px] md:h-[520px] overflow-hidden rounded-3xl border border-slate-200 bg-slate-100 shadow-xl">
+              {REVIEW_IMAGES.map((image, index) => (
+                <img
+                  key={`${image}-${index}`}
+                  src={image}
+                  alt={`Parent review ${index + 1}`}
+                  className={`absolute inset-0 h-full w-full object-contain p-3 sm:p-4 md:p-5 transition-opacity duration-700 ${index === activeReviewSlide ? 'opacity-100' : 'opacity-0'}`}
+                />
+              ))}
+
+              <button
+                type="button"
+                aria-label="Previous review"
+                onClick={prevReviewSlide}
+                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white"
               >
-                <div className="flex gap-1 mb-4">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} size={16} className="text-amber-400 fill-amber-400" />
-                  ))}
-                </div>
-                <p className="text-slate-600 leading-relaxed mb-5 italic">"{t.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-amber-400 to-teal-500 rounded-full flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                    {t.name[0]}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-slate-900 text-sm">{t.name}</div>
-                    <div className="text-slate-500 text-xs">{t.role}</div>
-                  </div>
-                </div>
-              </div>
-            ))}
+                <ChevronLeft size={22} />
+              </button>
+              <button
+                type="button"
+                aria-label="Next review"
+                onClick={nextReviewSlide}
+                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white"
+              >
+                <ChevronRight size={22} />
+              </button>
+            </div>
+
+            <div className="mt-5 flex items-center justify-center gap-2">
+              {REVIEW_IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  type="button"
+                  aria-label={`Go to review ${index + 1}`}
+                  onClick={() => setActiveReviewSlide(index)}
+                  className={`h-2.5 rounded-full transition-all ${index === activeReviewSlide ? 'w-8 bg-amber-500' : 'w-2.5 bg-slate-300 hover:bg-slate-400'}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── Admissions CTA ── */}
-      <section className="py-20 sm:py-24 bg-gradient-to-r from-[#1e2a6e] to-teal-800 relative overflow-hidden">
+      <section className="py-20 sm:py-24 bg-gradient-to-r from-[#2f377f] to-[#4f2db7] relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-72 h-72 bg-amber-400/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl" />
@@ -683,7 +862,7 @@ export default function App() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
-              onClick={() => scrollTo('contact')}
+              onClick={openAdmissionsPopup}
               className="group px-8 py-4 bg-amber-400 hover:bg-amber-500 text-slate-900 font-bold rounded-full transition-all duration-200 shadow-lg hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"
             >
               Schedule a Visit
@@ -707,11 +886,12 @@ export default function App() {
           className={`max-w-7xl mx-auto px-4 transition-all duration-700 ${contactVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
         >
           <div className="text-center mb-5">
-            <div className="inline-block bg-amber-500 text-white font-bold tracking-widest text-xl px-12 py-4 rounded-full mb-6 shadow-lg">
+            <div className="inline-block bg-[#d07a14] text-white font-bold tracking-widest text-xl px-12 py-4 rounded-full mb-6 shadow-lg">
               CONTACT US
             </div>
             <p className="text-slate-500 text-base">For Queries regarding Admissions / For feedback</p>
-            <h3 className="text-2xl font-bold text-[#1e2a6e] mt-2 tracking-widest">GET IN TOUCH</h3>
+            <h3 className={`section-heading text-2xl font-bold text-[#2f377f] mt-2 tracking-widest ${contactVis.inView ? 'section-heading-active' : 'opacity-0 translate-y-4'}`}>GET IN TOUCH</h3>
+            <div className={`section-underline mx-auto mt-4 ${contactVis.inView ? 'w-28 opacity-100' : 'w-0 opacity-0'}`} />
           </div>
 
           {/* Contact Info Grid */}
@@ -720,7 +900,7 @@ export default function App() {
               {
                 icon: MapPin,
                 title: 'Address',
-                lines: ['Road No 15, Vasanth Nagar,', 'KPHB, Hyderabad,', 'India, 500072'],
+                lines: ['Bus Stop, Phase 2, B near, Rd Number 16,', 'Kukatpally Housing Board Colony, Vasanth Nagar,', 'Hyderabad, Telangana 500085'],
                 color: 'text-[#1e2a6e]',
                 bg: 'bg-slate-50',
               },
@@ -763,23 +943,47 @@ export default function App() {
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-10 items-start">
+          <div className="mb-12 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+            <div className="bg-slate-50 px-5 py-3 text-sm text-slate-600">
+              <span className="font-semibold text-slate-800">Map:</span> {SCHOOL_ADDRESS}
+            </div>
+            <iframe
+              title="The Elegancia School location"
+              src={MAP_EMBED_URL}
+              className="h-[320px] w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+
+          <div className="grid lg:grid-cols-12 gap-8 items-start">
             {/* Franchise & Resume */}
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="text-center bg-slate-50 rounded-2xl p-8 border border-slate-200">
-                <h4 className="text-[#1e2a6e] font-bold text-lg tracking-wide mb-4">FOR FRANCHISE</h4>
+            <div className="lg:col-span-4 space-y-5">
+              <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                <p className="text-xs font-semibold tracking-[0.2em] text-teal-700 uppercase mb-2">Need More Info?</p>
+                <h4 className="text-2xl font-bold text-[#1e2a6e] leading-tight">Choose the right contact option</h4>
+                <p className="text-slate-600 text-sm mt-3">
+                  Reach us directly for franchise opportunities or career applications.
+                </p>
+              </div>
+
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+                <h5 className="text-[#1e2a6e] font-bold text-base tracking-wide mb-2">FOR FRANCHISE</h5>
+                <p className="text-slate-600 text-sm mb-4">Discuss partnership and expansion opportunities with our team.</p>
                 <a
                   href="mailto:theeleganciaschool@gmail.com?subject=Franchise Enquiry"
-                  className="inline-block px-6 py-3 bg-[#1e2a6e] hover:bg-[#162058] text-white font-semibold rounded-xl transition-colors text-sm"
+                  className="inline-flex items-center justify-center w-full px-5 py-3 bg-[#1e2a6e] hover:bg-[#162058] text-white font-semibold rounded-xl transition-colors text-sm"
                 >
                   Contact Here
                 </a>
               </div>
-              <div className="text-center bg-slate-50 rounded-2xl p-8 border border-slate-200">
-                <h4 className="text-[#1e2a6e] font-bold text-lg tracking-wide mb-4">FOR SENDING RESUME</h4>
+
+              <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 hover:shadow-md transition-shadow">
+                <h5 className="text-[#1e2a6e] font-bold text-base tracking-wide mb-2">FOR SENDING RESUME</h5>
+                <p className="text-slate-600 text-sm mb-4">Share your profile and become part of our teaching community.</p>
                 <a
                   href="mailto:theeleganciaschool@gmail.com?subject=Resume Submission"
-                  className="inline-block px-6 py-3 bg-[#1e2a6e] hover:bg-[#162058] text-white font-semibold rounded-xl transition-colors text-sm"
+                  className="inline-flex items-center justify-center w-full px-5 py-3 bg-[#1e2a6e] hover:bg-[#162058] text-white font-semibold rounded-xl transition-colors text-sm"
                 >
                   Click Here
                 </a>
@@ -787,13 +991,23 @@ export default function App() {
             </div>
 
             {/* Enquiry Form */}
-            <div className="bg-slate-50 rounded-3xl p-8 border border-slate-100">
+            <div className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm">
               <h3 className="text-xl font-bold text-slate-900 mb-6">Send Us an Enquiry</h3>
-              <form className="space-y-4" onSubmit={e => e.preventDefault()}>
+              <form
+                action="https://formsubmit.co/smartkennedyschoolteam@gmail.com"
+                method="POST"
+                onSubmit={handleFormSubmit('home')}
+                className="space-y-4"
+              >
+                <input type="hidden" name="_subject" value="New Admission Form - Home" />
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="hidden" name="_template" value="table" />
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Parent Name</label>
                     <input
+                      required
+                      name="parent_name"
                       type="text"
                       placeholder="Your name"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 placeholder:text-slate-400 transition-all"
@@ -802,6 +1016,8 @@ export default function App() {
                   <div>
                     <label className="block text-sm font-medium text-slate-700 mb-1.5">Child's Name</label>
                     <input
+                      required
+                      name="child_name"
                       type="text"
                       placeholder="Child's name"
                       className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 placeholder:text-slate-400 transition-all"
@@ -811,14 +1027,31 @@ export default function App() {
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1.5">Phone Number</label>
                   <input
+                    required
+                    name="mobile_number"
                     type="tel"
                     placeholder="+91 XXXXX XXXXX"
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 placeholder:text-slate-400 transition-all"
                   />
                 </div>
                 <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1.5">Email</label>
+                  <input
+                    required
+                    name="email"
+                    type="email"
+                    placeholder="name@example.com"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 placeholder:text-slate-400 transition-all"
+                  />
+                </div>
+                <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1.5">Program of Interest</label>
-                  <select className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 transition-all">
+                  <select
+                    required
+                    name="class"
+                    defaultValue=""
+                    className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 transition-all"
+                  >
                     <option value="">Select a program</option>
                     <option>Play Group (1.5 – 2.5 yrs)</option>
                     <option>Nursery (2.5 – 3.5 yrs)</option>
@@ -831,6 +1064,7 @@ export default function App() {
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1.5">Message (Optional)</label>
                   <textarea
+                    name="message"
                     rows={3}
                     placeholder="Any questions or special requests..."
                     className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-100 text-slate-800 placeholder:text-slate-400 transition-all resize-none"
@@ -838,11 +1072,17 @@ export default function App() {
                 </div>
                 <button
                   type="submit"
+                  disabled={isSendingHomeForm}
                   className="w-full py-4 bg-[#1e2a6e] hover:bg-[#162058] text-white font-bold rounded-xl transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 flex items-center justify-center gap-2"
                 >
-                  Submit Enquiry
+                  {isSendingHomeForm ? 'Sending...' : 'Submit Enquiry'}
                   <ArrowRight size={18} />
                 </button>
+                {homeFormStatus && (
+                  <p className={`text-center text-sm ${homeFormStatus.type === 'success' ? 'text-emerald-700' : 'text-red-600'}`}>
+                    {homeFormStatus.message}
+                  </p>
+                )}
               </form>
             </div>
           </div>
@@ -851,25 +1091,28 @@ export default function App() {
 
       {/* ── Footer ── */}
       <footer className="bg-slate-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 py-14">
+        <div
+          ref={footerVis.ref}
+          className={`max-w-7xl mx-auto px-4 py-14 transition-all duration-700 ${footerVis.inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+        >
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
             <div className="lg:col-span-2">
-              <img src="/cropped-logo270by80.webp" alt="The Elegancia School" className="h-12 w-auto object-contain mb-5 brightness-0 invert" />
+             
               <p className="text-slate-400 text-sm leading-relaxed max-w-sm mb-4">
                 A Finland-inspired preschool in Vasanth Nagar, Hyderabad dedicated to nurturing curious,
                 confident, and joyful learners from 1.5 to 6 years of age.
               </p>
               <p className="text-slate-500 text-xs italic mb-5">Unleashing potential in childhood</p>
               <div className="flex items-center gap-4">
-                <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition-colors">
                   <Facebook size={16} />
                 </a>
-                <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
+                <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 bg-white/10 hover:bg-rose-500 rounded-full flex items-center justify-center transition-colors">
                   <Instagram size={16} />
                 </a>
-                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+                <a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer"
                   className="w-9 h-9 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center transition-colors">
                   <Youtube size={16} />
                 </a>
@@ -922,6 +1165,98 @@ export default function App() {
           </div>
         </div>
       </footer>
+
+      {showAdmissionsPopup && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-start justify-center bg-black/45 p-3 sm:items-center sm:p-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) closeAdmissionsPopup();
+          }}
+        >
+          <div
+            className="relative w-full max-w-[680px] max-h-[calc(100vh-1.5rem)] overflow-y-auto bg-[#e6e4d2] px-4 py-5 shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] sm:max-h-[calc(100vh-2rem)] sm:px-7 sm:py-7"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              onClick={closeAdmissionsPopup}
+              className="absolute right-2 top-2 inline-flex h-10 w-10 items-center justify-center text-4xl leading-none text-gray-700"
+            >
+              ×
+            </button>
+
+            <h4 className="pr-10 text-left text-3xl font-bold text-[#1e2a6e] sm:text-3xl">Admissions Open 2026-27</h4>
+
+            <form
+              action="https://formsubmit.co/smartkennedyschoolteam@gmail.com"
+              method="POST"
+              onSubmit={handleFormSubmit('popup')}
+              className="mt-6 grid grid-cols-1 gap-3 md:grid-cols-2"
+            >
+              <input type="hidden" name="_subject" value="New Admission Form - Popup" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="table" />
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+                Parent Name *
+                <input required name="parent_name" className="h-10 border border-gray-400 bg-white px-3 text-slate-900 outline-none" />
+              </label>
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+                Child Name *
+                <input required name="child_name" className="h-10 border border-gray-200 bg-white px-3 text-slate-900 outline-none" />
+              </label>
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+                Mobile Number *
+                <div className="flex h-10 items-center border border-gray-200 bg-white px-3">
+                  <span className="mr-2">IN</span>
+                  <input required name="mobile_number" type="tel" className="flex-1 bg-transparent text-slate-900 outline-none" />
+                </div>
+              </label>
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700">
+                Email *
+                <input required name="email" type="email" className="h-10 border border-gray-200 bg-white px-3 text-slate-900 outline-none" />
+              </label>
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700 md:col-span-2">
+                Class *
+                <select required name="class" defaultValue="" className="h-10 border border-gray-200 bg-white px-3 text-slate-900 outline-none">
+                  <option value="" disabled>Select class</option>
+                    <option>Play Group (1.5 – 2.5 yrs)</option>
+                    <option>Nursery (2.5 – 3.5 yrs)</option>
+                    <option>LKG (3.5 – 4.5 yrs)</option>
+                    <option>UKG (4.5 – 5.5 yrs)</option>
+                    <option>Day Care</option>
+                    <option>Evening Activities</option>
+                </select>
+              </label>
+
+              <label className="grid gap-1.5 text-sm font-medium text-slate-700 md:col-span-2">
+                Message *
+                <textarea required name="message" rows={4} className="border border-gray-200 bg-white px-3 py-2 text-slate-900 outline-none" />
+              </label>
+
+              <div className="mt-2 flex flex-col items-center gap-3 md:col-span-2">
+                <button
+                  type="submit"
+                  disabled={isSendingPopupForm}
+                  className="h-11 min-w-40 rounded-full border border-gray-500 bg-transparent px-8 text-xl font-semibold text-[#1e2a6e]"
+                >
+                  {isSendingPopupForm ? 'Sending...' : 'Submit'}
+                </button>
+                {popupFormStatus && (
+                  <p className={`text-center text-sm ${popupFormStatus.type === 'success' ? 'text-emerald-700' : 'text-red-600'}`}>
+                    {popupFormStatus.message}
+                  </p>
+                )}
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
