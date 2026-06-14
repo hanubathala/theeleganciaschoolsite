@@ -300,6 +300,16 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.documentElement.classList.toggle('modal-open', showAdmissionsPopup);
+    document.body.classList.toggle('modal-open', showAdmissionsPopup);
+    return () => {
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
+    };
+  }, [showAdmissionsPopup]);
+
+  useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveReviewSlide(prev => (prev + 1) % REVIEW_IMAGES.length);
     }, 3500);
@@ -407,9 +417,13 @@ export default function App() {
 
       {/* ── Navbar ── */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-[#e6e4d2] shadow-md py-2' : 'bg-[#e6e4d2]/95 backdrop-blur-sm py-3'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
-          <a href="#home" onClick={() => scrollTo('home')} className="flex-shrink-0">
-            <img src={logo} alt="Elegancia School" className="h-12 w-auto sm:h-14" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+          <a
+            href="#home"
+            onClick={() => scrollTo('home')}
+            className="absolute left-1/2 -translate-x-1/2 flex-shrink-0 xl:static xl:translate-x-0"
+          >
+            <img src={logo} alt="Elegancia School" className="h-14 w-auto sm:h-16 xl:h-14" />
           </a>
 
           {/* Desktop Nav */}
@@ -430,7 +444,7 @@ export default function App() {
           </nav>
 
           {/* Social + Mobile toggle */}
-          <div className="flex items-center gap-3">
+          <div className="ml-auto flex items-center gap-3">
             <div className="hidden sm:flex items-center gap-2">
               <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer"
                 className="p-1.5 rounded-lg transition-colors text-slate-500 hover:text-blue-600">
@@ -827,7 +841,7 @@ export default function App() {
                 type="button"
                 aria-label="Previous review"
                 onClick={prevReviewSlide}
-                className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white"
+                className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white sm:block"
               >
                 <ChevronLeft size={22} />
               </button>
@@ -835,7 +849,7 @@ export default function App() {
                 type="button"
                 aria-label="Next review"
                 onClick={nextReviewSlide}
-                className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white"
+                className="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-white/95 p-2 text-slate-700 shadow-md ring-1 ring-slate-200 transition hover:bg-white sm:block"
               >
                 <ChevronRight size={22} />
               </button>

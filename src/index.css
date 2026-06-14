@@ -14,13 +14,27 @@
   html {
     scroll-behavior: smooth;
     font-family: 'Inter', system-ui, sans-serif;
+    overflow-x: hidden;
+    min-height: 100%;
   }
 
   body {
     @apply text-slate-800;
     background: linear-gradient(180deg, #fffdf7 0%, #fffaf0 100%);
+    overflow-x: hidden;
+    min-height: 100%;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100%;
+    overflow: visible;
+  }
+
+  html.modal-open,
+  body.modal-open {
+    overflow: hidden !important;
   }
 
   * {
